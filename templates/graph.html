@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Graphs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Performance Graphs</h1>
+        <form id="graph-form" method="POST" action="/graph">
+            <select name="graph_choice">
+                <option value="1">Marks Class Count Graph</option>
+                <option value="2">Marks Class Semester-wise Graph</option>
+                <option value="3">Marks Class Gender-wise Graph</option>
+                <option value="4">Marks Class Nationality-wise Graph</option>
+                <option value="5">Marks Class Grade-wise Graph</option>
+                <option value="6">Marks Class Section-wise Graph</option>
+                <option value="7">Marks Class Topic-wise Graph</option>
+                <option value="8">Marks Class Stage-wise Graph</option>
+                <option value="9">Marks Class Absent Days-wise Graph</option>
+            </select>
+            <button type="submit">Show Graph</button>
+        </form>
+
+        <div class="graph">
+            {% if graph_path %}
+                <img src="{{ url_for('static', filename=graph_path) }}" alt="Graph">
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

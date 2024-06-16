@@ -3,218 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Performance Monitoring System</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .container {
-        max-width: 800px;
-        margin: 50px auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        text-align: center;
-        color: #333;
-    }
-
-    form {
-        text-align: left;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    select,
-    input[type="number"] {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
-    button {
-        width: 100%;
-        padding: 10px;
-        background-color: #4CAF50;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    button:hover {
-        background-color: #45a049;
-    }
-
-    #result {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-</style>
+    <title>Student Performance Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body style="background-color: rgb(188, 188, 224);">
+<body>
+    <div class="background"></div>
     <div class="container">
-        <h1>Student Performance Monitoring System</h1>
-        <form id="inputForm" onSubmit=predict() action="/predict" method="POST">
-            <label for="testInput">Do you want to test specific input (Y/N):</label>
-            <select id="testInput">
-                <option value="y">Yes</option>
-                <option value="n">No</option>
-            </select><br><br>
-            <label for="gender">Gender:</label>
-            <select id="gender">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select><br><br>
-            <label for="nationality">Nationality:</label>
-            <select id="nationality">
-                <option value="KW">KW</option>
-                <option value="lebanon">Lebanon</option>
-                <option value="Egypt">Egypt</option>
-                <option value="SaudiArabia">Saudi Arabia</option>
-                <option value="USA">USA</option>
-                <option value="Jordan">Jordan</option>
-                <option value="venzuela">Venzuela</option>
-                <option value="Iran">Iran</option>
-                <option value="Tunis">Tunis</option>
-                <option value="Syria">Syria</option>
-                <option value="Morocco">Morocco</option>
-                <option value="Palestine">Palestine</option>
-                <option value="Iraq">Iraq</option>
-                <option value="Lybia">Lybia</option>
-            </select><br><br>
-            <label for="placeOfBirth">Place of Birth:</label>
-            <select id="placeOfBirth">
-                <option value="KuwaIT">KuwaIT</option>
-                <option value="lebanon">Lebanon</option>
-                <option value="Egypt">Egypt</option>
-                <option value="SaudiArabia">Saudi Arabia</option>
-                <option value="USA">USA</option>
-                <option value="Jordan">Jordan</option>
-                <option value="venzuela">Venzuela</option>
-                <option value="Iran">Iran</option>
-                <option value="Tunis">Tunis</option>
-                <option value="Syria">Syria</option>
-                <option value="Morocco">Morocco</option>
-                <option value="Palestine">Palestine</option>
-                <option value="Iraq">Iraq</option>
-                <option value="Lybia">Lybia</option>
-            </select><br><br>
-            <label for="gradeID">Grade ID:</label>
-            <select id="gradeID">
-                <option value="G-04">G-04</option>
-                <option value="G-07">G-07</option>
-                <option value="G-08">G-08</option>
-                <option value="G-06">G-06</option>
-                <option value="G-05">G-05</option>
-                <option value="G-09">G-09</option>
-                <option value="G-11">G-11</option>
-                <option value="G-12">G-12</option>
-                <option value="G-10">G-10</option>
-                <option value="G-02">G-02</option>
-            </select><br><br>
-            <label for="sectionID">Section ID:</label>
-            <select id="sectionID">
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-            </select><br><br>
-            <label for="topic">Topic:</label>
-            <select id="topic">
-                <option value="IT">IT</option>
-                <option value="Math">Math</option>
-                <option value="Arabic">Arabic</option>
-                <option value="Science">Science</option>
-                <option value="English">English</option>
-                <option value="Quran">Quran</option>
-                <option value="Spanish">Spanish</option>
-                <option value="French">French</option>
-                <option value="History">History</option>
-                <option value="Biology">Biology</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="Geology">Geology</option>
-            </select><br><br>
-            <label for="semester">Semester:</label>
-            <select id="semester">
-                <option value="F">First</option>
-                <option value="S">Second</option>
-            </select><br><br>
-            <label for="relation">Relation:</label>
-            <select id="relation">
-                <option value="Father">Father</option>
-                <option value="Mum">Mother</option>
-            </select><br><br>
-            <label for="raisedhands">Raised Hands:</label>
-            <input type="number" id="raisedhands"><br><br>
-            <label for="visitedResources">Visited Resources:</label>
-            <input type="number" id="visitedResources"><br><br>
-            <label for="announcementsView">Announcements View:</label>
-            <input type="number" id="announcementsView"><br><br>
-            <label for="discussion">Discussion:</label>
-            <input type="number" id="discussion"><br><br>
-            <label for="parentAnsweringSurvey">Parent Answering Survey:</label>
-            <select id="parentAnsweringSurvey">
-                <option value="Y">Yes</option>
-                <option value="N">No</option>
-            </select><br><br>
-            <label for="parentCollegeSatisfaction">Parent College Satisfaction:</label>
-            <select id="parentCollegeSatisfaction">
-                <option value="Good">Good</option>
-                <option value="Bad">Bad</option>
-            </select><br><br>
-            <label for="studentAbsenceDays">Student Absence Days:</label>
-            <select id="studentAbsenceDays">
-                <option value="Under-7">Under 7</option>
-                <option value="Above-7">Above 7</option>
-            </select><br><br>
-            <button type="submit">Submit</button>
-        </form>
-        <div id="result"></div>
-    </div>
-    <script>
-        function predict(event) {
-            event.preventDefault(); // Prevent the default form submission
-            var formData = new FormData(document.getElementById("inputForm"));
-            // Convert form data to JSON
-            var jsonData = {};
-            formData.forEach(function(value, key){
-                // Append 'Input' to the key to match the expected form field names in Flask
-                jsonData[key + 'Input'] = value;
-            });
-            // Send form data to Flask server
-            fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(jsonData)
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
+        <h1>Student Performance Prediction</h1>
+        <form id="prediction-form" method="POST" action="/predict">
+            <div class="form-group">
+                <label for="raised_hands">Raised Hands:</label>
+                <input type="number" id="raised_hands" name="raised_hands" required>
+            </div>
 
-            return false;
-        }
-    </script>
-    
+            <div class="form-group">
+                <label for="visited_resources">Visited Resources:</label>
+                <input type="number" id="visited_resources" name="visited_resources" required>
+            </div>
+
+            <div class="form-group">
+                <label for="discussions">Discussions:</label>
+                <input type="number" id="discussions" name="discussions" required>
+            </div>
+
+            <div class="form-group">
+                <label for="absences">Absences:</label>
+                <select id="absences" name="absences" required>
+                    <option value="1">Under-7</option>
+                    <option value="0">Above-7</option>
+                </select>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div class="result" id="result">
+            {% if result %}
+                <h2>Predictions:</h2>
+                <p>Decision Tree: {{ result['Decision Tree'] }}</p>
+                <p>Random Forest: {{ result['Random Forest'] }}</p>
+                <p>Perceptron: {{ result['Perceptron'] }}</p>
+                <p>Logistic Regression: {{ result['Logistic Regression'] }}</p>
+                <p>Neural Network: {{ result['Neural Network'] }}</p>
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>
